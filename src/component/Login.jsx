@@ -13,18 +13,17 @@ const  LoginPage = () => {
 
     const handleSubmit = async () => {
       
-      // console.log("haiiiii")
       try {
         const data = { email, password }
         const response = await apiClient.post("/login",data);
         console.log(response.data)
-        setMessage(response.data);
+        // setMessage(response.data);
         localStorage.setItem("authToken", response.data.accessToken);
         localStorage.setItem("Email", response.data.email);
         navigate("/user")
       } catch (error) {
-        console.error("Login error:",  error.message);
-        setMessage("Error at Login");
+        console.error("Login error", );
+        setMessage("Invaild Credentials");
       }
     };
 
@@ -70,6 +69,11 @@ const  LoginPage = () => {
           >
             Login
           </button>
+        </div>
+
+        <div className="flex mt-2 items-center justify-between ">
+          <button className="text-blue-700   cursor-pointer"    onClick={() => navigate('/forgotpassword')}>Forgot Password ?</button>
+          <button className="text-gray-800 cursor-pointer" onClick={() => navigate('/signup')}>SignUp</button>
         </div>
         {message && (
           <p className="mt-4 text-center text-sm text-gray-600">{message}</p>
