@@ -20,7 +20,7 @@ const  LoginPage = () => {
         // setMessage(response.data);
         localStorage.setItem("authToken", response.data.accessToken);
         localStorage.setItem("Email", response.data.email);
-        navigate("/user")
+        navigate("/products")
       } catch (error) {
         console.error("Login error", );
         setMessage("Invaild Credentials");

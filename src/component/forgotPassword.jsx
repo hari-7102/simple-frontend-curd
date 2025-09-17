@@ -32,7 +32,8 @@ const  forgotPassword = () => {
             alert("Password Change Successfully ... ")
             navigate("/login")
         }catch (error) {
-
+            console.log("Error ", error.response?.data?.message || error.message);
+            setError(error.response?.data?.message || "Something went wrong");
         }
     };
 
@@ -92,6 +93,7 @@ const  forgotPassword = () => {
             </button>
         </div>
         </div>
+
 
         <p    onClick={() => navigate('/login')}
         className="text-gray-700 text-center mt-7 hover:text-blue-800 cursor-pointer">Login Page</p>
