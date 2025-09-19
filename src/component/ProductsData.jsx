@@ -48,21 +48,32 @@ const ProductsData = () => {
 
 
 
-const handleLogout = async () => {
-  
-    // Clear access token (localStorage / state)
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("Email");
 
-    // Call backend logout → clears refresh token cookie
-    await axios.post("http://localhost:3000/logout", {
-      
-      credentials: "include", // ✅ send cookies
+const handleLogout = async () => {
+  try {
+    // Clear localStorage
+
+
+    // Remove global Authorization header if set
+    delete axios.defaults.headers.common["Authorization"];
+
+    // Call backend logout (correct port + correct config)
+    await axios.post("http://localhost:3000/logout", {}, {
+      withCredentials: true, // ✅ must be in config, not body
     });
 
+    localStorage.removeItem("authToken");
+    localStorage.removeItem("Email");
+    localStorage.removeItem("User_id");
+
     // Redirect to login page
-    navigate("/login");
+    window.location.href="/login"
+    
+  } catch (error) {
+    console.error("Logout error", error);
+  }
 };
+
 
 
 

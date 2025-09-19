@@ -12,20 +12,22 @@ const  LoginPage = () => {
   const navigate = useNavigate();
 
     const handleSubmit = async () => {
-      
       try {
-        const data = { email, password }
-        const response = await apiClient.post("/login",data);
-        console.log(response.data)
-        // setMessage(response.data);
+        const data = { email, password };
+        const response = await axios.post("http://localhost:3000/login", data, {
+          withCredentials: true,   // ✅ ensures refreshToken cookie is set
+        });
+
         localStorage.setItem("authToken", response.data.accessToken);
         localStorage.setItem("Email", response.data.email);
-        navigate("/products")
+        localStorage.setItem("User_id", response.data.userId);
+        window.location.href= "/products";
       } catch (error) {
-        console.error("Login error", );
-        setMessage("Invaild Credentials");
+        console.error("Login error", error);
+        setMessage("Invalid Credentials");
       }
     };
+
 
   
 

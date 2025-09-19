@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const token = localStorage.getItem('authToken') || null;
 
+console.log("token from apiclient", token)
+
 
 const apiClient = axios.create({
   // baseURL:  'https://www.goldenfields.in/crm_regent',
